@@ -2,7 +2,12 @@ import time
 import numpy as np
 import random
 import torch
-from Game import *
+import sys, os
+
+project_root = os.path.abspath(os.path.join(os.getcwd(), '..', '..'))
+sys.path.append(project_root)
+
+from Resources.Game import *
 
 def MC_TS(game, model, root=None, tmax=60, prints=False, factor_explore=1e-2):
     '''

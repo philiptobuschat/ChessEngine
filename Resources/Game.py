@@ -53,9 +53,9 @@ class Game:
         return
 
     def copy(self):
-        """
-        Create a deep copy of the Game object.
-        """
+        '''
+        Create a deep copy of the game
+        '''
         new_game = Game()
         new_game.pieces = self.pieces.copy()
         new_game.turn = self.turn
@@ -948,6 +948,7 @@ class Game:
                     self.can_castle_black_long = new_game.can_castle_black_long
                     self.can_castle_black_short = new_game.can_castle_black_short
                     self.pawn_to_be_en_passant = new_game.pawn_to_be_en_passant
+                    self.counter_draw_by_moves = new_game.counter_draw_by_moves
 
                 else:
                     # prepare env for in check test
