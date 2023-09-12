@@ -575,12 +575,12 @@ class Game:
     
         return False
     
-    def InCheck_Julia(self):
-        '''
-        provide handle to julia call
-        '''
+    # def InCheck_Julia(self):
+    #     '''
+    #     provide handle to julia call
+    #     '''
 
-        return Main.InCheck(self.pieces)
+    #     return Main.InCheck(self.pieces)
 
     def PlayMove(self, move):
 
