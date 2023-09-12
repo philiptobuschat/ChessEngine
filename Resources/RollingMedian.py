@@ -25,14 +25,9 @@ class RollingMedian:
 
     def get_median(self):
         # heaps either have same number of elements or smaller half has one element more
-        try:
-            if len(self.smaller_half) == len(self.larger_half):
-                if len(self.smaller_half) == 0:
-                    return None
-                return (-self.smaller_half[0] + self.larger_half[0]) / 2.0
-            else:
-                return -self.smaller_half[0]
-        except:
-            print('get median failed: ')
-            print('smaller heap:', self.smaller_half )
-            print('larger heap:', self.larger_half )
+        if len(self.smaller_half) == len(self.larger_half):
+            if len(self.smaller_half) == 0:
+                return None
+            return (-self.smaller_half[0] + self.larger_half[0]) / 2.0
+        else:
+            return -self.smaller_half[0]

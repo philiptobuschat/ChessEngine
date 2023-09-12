@@ -80,8 +80,6 @@ class ModelGuided_Node:
     '''
     every instance corresponds to a move in the expansion tree.
     game is the state after playing the move
-    batched: value function evaluation in batches for acceleration
-    batched v3: collect not only wins but wins, matdiff, value for positions / backpropagation
     '''
     def __init__(self, move, parent, game, factors):
         self.move = move;   self.parent = parent
@@ -133,11 +131,11 @@ class ModelGuided_Node:
         
 
         self.children_values = [
-              self.factors[0]    * self.values_win[c] 
-            + self.factors[1]     * self.values_mat[c]
+              self.factors[0]   * self.values_win[c] 
+            + self.factors[1]   * self.values_mat[c]
             + self.factors[2]   * self.values_value_sum[c]
             + self.factors[3]   * self.values_value_indi[c]
-            + self.factors[4] * self.values_explore[c]
+            + self.factors[4]   * self.values_explore[c]
             for c, child in enumerate(self.children)
         ]
 

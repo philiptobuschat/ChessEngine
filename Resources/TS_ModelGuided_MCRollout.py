@@ -53,8 +53,6 @@ class MC_Node:
     '''
     every instance corresponds to a move in the expansion tree.
     game is the state after playing the move
-    batched: value function evaluation in batches for acceleration
-    batched v3: collect not only wins but wins, matdiff, value for positions / backpropagation
     '''
     def __init__(self, move, parent, game, factor_explore):
         self.move = move;   self.parent = parent
