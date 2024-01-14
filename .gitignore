@@ -1,0 +1,7 @@
+.DS_Store
+*.pyc
+.vscode
+
+# model checkpoints
+model_*_batches
+model_*_games
