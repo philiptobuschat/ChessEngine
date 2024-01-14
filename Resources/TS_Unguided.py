@@ -1,3 +1,5 @@
+# Tree Search guided by heuristics
+
 import time
 import numpy as np
 import random

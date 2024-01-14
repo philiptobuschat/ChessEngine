@@ -104,6 +104,20 @@ class Game:
             return True
 
         return False
+    
+    def is_over_eff(self):
+        '''
+        more efficient version of is_over
+        '''
+
+        moves = self.PossibleMoves(any=True)
+
+        # No moves available -> stalemate or checkmate
+        if len(moves) == 0: 
+            return True
+
+        return False
+
 
     def get_winner(self):
         '''
@@ -720,7 +734,7 @@ class Game:
 
         return diff
 
-    def PossibleMoves(self):
+    def PossibleMoves(self, any=False):
         '''
         version of possiblemoves where positions of opponent's pieces are given to incheck
         '''
@@ -928,6 +942,8 @@ class Game:
 
             if not (row or column or diag_down or diag_up) and not incheck_before: # move[0] shares no line with king -> certainly playable
                 playable = True
+                if any:
+                    return [True]
 
             if not playable: 
 
@@ -2127,6 +2143,42 @@ def board_to_tensor(board):
         tensor[i+6, :] = torch.from_numpy((board == i+11).astype('uint8'))
     
     return tensor
+
+def board_to_bool_tensor(board):
+    '''
+    Transforms a chess board represented as a numpy array into a PyTorch tensor
+    with 12 channels, where each channel represents a piece type and the values
+    are either 0 or 1, indicating the presence of a piece of that type on a square.
+    '''
+    # create empty 12-channel tensor
+    tensor = torch.zeros((12, 8, 8))
+    
+    # loop through each piece type
+    for i in range(6):
+        # white pieces channel
+        tensor[i, :] = torch.from_numpy((board == i+1).astype('uint8'))
+        # black pieces channel
+        tensor[i+6, :] = torch.from_numpy((board == i+11).astype('uint8'))
+    
+    return tensor
+
+def bool_tensor_to_board(tensor):
+    '''
+    Transforms a PyTorch tensor with 12 channels representing a chess board into
+    a numpy array, where each element is an integer representing a piece type or 0
+    for an empty square.
+    '''
+    # create empty 8x8 numpy array
+    board = np.zeros((8, 8), dtype=int)
+    
+    # loop through each piece type
+    for i in range(6):
+        # white pieces channel
+        board[tensor[i, :] == True] = i+1
+        # black pieces channel
+        board[tensor[i+6, :] == True] = i+11
+        
+    return board
 
 def tensor_to_board(tensor):
     '''

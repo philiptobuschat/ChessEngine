@@ -5,3 +5,9 @@
 # model checkpoints
 model_*_batches
 model_*_games
+
+# game saves
+Game Saves */
+
+*temp*/
+*temp*
